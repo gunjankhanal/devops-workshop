@@ -1,0 +1,2 @@
+I am writing a file via cat command
+I am writing something on file1
