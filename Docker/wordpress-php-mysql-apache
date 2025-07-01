@@ -47,4 +47,9 @@ volumes:
   wordpress_data:
   mariadb_data:
 
+
 ubuntu@jenkins-srv:~/Desktop/awesome-compose/apache-wordpress-php-mariadb/apache-wordpress-php-mariadb/apache-wordpress-php-mariadb$
+
+docker exec -it mariadb-container /bin/bash
+> mysql -u root -pabcd1234
+>
