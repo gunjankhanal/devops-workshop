@@ -1,0 +1,50 @@
+ubuntu@jenkins-srv:~/
+cat .env
+
+WORDPRESS_DB_NAME=mydb
+WORDPRESS_DB_USER=techuser
+WORDPRESS_DB_PASSWORD=techpassword
+
+MYSQL_ROOT_PASSWORD=abcd1234
+MYSQL_USER=techuser
+MYSQL_PASSWORD=techpassword
+MYSQL_DATABASE=mydb
+
+ubuntu@jenkins-srv:~/Desktop/awesome-compose/apache-wordpress-php-mariadb/apache-wordpress-php-mariadb/apache-wordpress-php-mariadb$ cat compose.yaml
+
+version: '3'
+
+services:
+  wordpress:
+    image: wordpress:6.7.1-php8.1-apache
+    environment:
+      WORDPRESS_DB_NAME: "${WORDPRESS_DB_NAME}"
+      WORDPRESS_DB_USER: "${WORDPRESS_DB_USER}"
+      WORDPRESS_DB_PASSWORD: "${WORDPRESS_DB_PASSWORD}"
+    ports:
+      - 8080:80
+    networks:
+      - wpnetwork
+    volumes:
+      - wordpress_data:/var/usr/html
+    depends_on:
+      - mysql
+  mysql:
+    image: mariadb:11.7.1-ubi9-rc
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
+      MYSQL_DATABASE: "${MYSQL_DATABASE}"
+    networks:
+      - wpnetwork
+    volumes:
+      - mariadb_data:/var/lib/mysql
+networks:
+  wpnetwork:
+    driver: bridge
+volumes:
+  wordpress_data:
+  mariadb_data:
+
+ubuntu@jenkins-srv:~/Desktop/awesome-compose/apache-wordpress-php-mariadb/apache-wordpress-php-mariadb/apache-wordpress-php-mariadb$
