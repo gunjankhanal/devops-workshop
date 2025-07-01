@@ -1,0 +1,35 @@
+#!/bin/bash
+sudo apt -y update
+sudo  apt-y install wget
+wget https://github.com/prometheus/prometheus/releases/download/v3.3.0-rc.0/prometheus-3.3.0-rc.0.linux-amd64.tar.gz
+tar zxvf prometheus-3.3.0-rc.0.linux-amd64.tar.gz
+cd prometheus-3.3.0-rc.0.linux-amd64/
+vi prometheus2.yml
+
+global:  
+   scrape_interval: 15s
+   evaluation_interval: 15s
+scrape_configs: 
+   - job_name: "node-ec2"
+     static_configs: 
+       - targets: ["localhost:9100"] 
+         labels:
+           app: "node-ec2"
+
+
+./prometheus --config.file=prometheus2.yml &
+
+
+# this will run on port 9090
+# Linux Host Metrics | Base 10180
+
+# INSTALL NODE EXPORTER
+
+#!/bin/bash
+sudo apt -y update
+sudo  apt-y install wget
+sudo apt install apache2 -y
+wget https://github.com/prometheus/node_exporter/releases/download/v1.8.2/node_exporter-1.8.2.linux-amd64.tar.gz
+tar xvfz node_exporter-1.8.2.linux-amd64.tar.gz
+cd node_exporter-1.8.2.linux-amd64
+./node_exporter &
