@@ -1,0 +1,17 @@
+hname=$(hostname)
+IP_ADDRESS=$(hostname -i)
+CPU_UTIL=$(uptime | cut -c46-)
+MEMORY_USE=$(free -m -h | sed -n 2p | cut -c40-46)
+echo "Hi ${USER}, your hostname is ${hname}. Your IP is $IP_ADDRESS . Your CPU utilization is ${CPU_UTIL}. Your Memory Utilization is ${MEMORY_USE}"
+====================================================================================
+whoami
+export AWS_KEY="2748hkjash7712482847gh"
+echo "Hello Tech"
+echo "Hello from ${name}"
+echo "The bool value is ${boolvalue}"
+echo "The environment you choosed is ${env}"
+echo "The build ID is ${BUILD_ID}"
+echo "The build NUMBER is ${BUILD_NUMBER}"
+echo "The Present working directory is $(pwd)"
+printenv
+======================================================================================
